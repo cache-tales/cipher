@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#14221b">
+  <title>Cache Tales | First Contact: Mailbox &amp; Shed</title>
+  <link rel="stylesheet" href="./world-poc.css">
+</head>
+<body>
+  <section class="lab-controls" aria-label="Compare three game interfaces">
+    <div class="lab-intro"><strong>INTERFACE WORKSHOP</strong><span>Choose a layout. The same game state carries across all three.</span></div>
+    <div class="lab-options" role="group" aria-label="Game interface design">
+      <button type="button" class="lab-option" data-ui-choice="cinematic" aria-pressed="true"><b>A</b> Cinematic</button>
+      <button type="button" class="lab-option" data-ui-choice="investigator" aria-pressed="false"><b>B</b> Field Investigator</button>
+      <button type="button" class="lab-option" data-ui-choice="expedition" aria-pressed="false"><b>C</b> Expedition</button>
+    </div>
+    <p id="lab-summary" class="lab-summary">More room for the mystery; actions appear when needed.</p>
+  </section>
+  <header class="topbar">
+    <div class="identity">
+      <img src="./assets/cache-tales-cipher-logo-approved-draft.png" alt="Cache Tales C.I.P.H.E.R." width="626" height="275" />
+      <div class="identity-sub"><span>FIELD RECORD 01</span><strong>First Contact</strong></div>
+    </div>
+    <nav class="top-actions" aria-label="Game navigation">
+      <button type="button" id="places-toggle" aria-controls="places-panel" aria-expanded="false">⌖ Known Locations</button>
+      <button type="button" id="reset-toggle" class="muted-action">↺ Reset test</button>
+    </nav>
+  </header>
+  <main>
+    <section class="chapter" aria-labelledby="area-title">
+      <div class="chapter-title"><div><p class="micro">AN UNEXPECTED DELIVERY</p><h1 id="area-title" tabindex="-1">Mailbox Area</h1></div><p class="area-summary" id="area-intro">A raised flag. No return address.</p></div>
+      <div class="layout-grid">
+      <div class="stage">
+      <div class="scene-shell">
+        <div id="scene-viewport" class="scene-viewport" tabindex="0" aria-label="Scroll or swipe horizontally to examine the full scene on small screens"><div id="scene" class="scene" data-area="mailbox" aria-label="Interactive illustrated scene">
+          <img id="scene-background" class="scene-background" src="./assets/mailbox-scene.webp" alt="Golden-hour forest trail and a closed weathered mailbox." draggable="false" width="1672" height="941" />
+          <!-- Both doors are extracted directly from the corresponding user-selected image.
+               The complete original picture remains the scene background. -->
+          <svg class="opening opening-mailbox" viewBox="0 0 1672 941" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="mailbox-cavity" x2=".9" y2="1"><stop offset="0" stop-color="#040d0b"/><stop offset=".65" stop-color="#111715"/><stop offset="1" stop-color="#49352c"/></linearGradient></defs>
+            <path d="M147 692 L148 412 Q157 328 221 280 Q308 222 398 311 Q468 375 477 450 L478 707 L160 711 Z" fill="url(#mailbox-cavity)" stroke="#1a1b18" stroke-width="9"/>
+            <path d="M163 423 Q182 330 249 298 Q312 270 377 322 Q442 389 451 442" fill="none" stroke="#6d533c" stroke-opacity=".38" stroke-width="12"/>
+          </svg>
+          <img id="mailbox-door-art" class="door-art mailbox-door-art" src="./assets/mailbox-door-cutout.webp" alt="" aria-hidden="true" draggable="false">
+          <div class="opening opening-shed" aria-hidden="true"><svg viewBox="0 0 1672 941" preserveAspectRatio="none"><defs><linearGradient id="shed-cavity" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#080d0b"/><stop offset=".62" stop-color="#1b251e"/><stop offset="1" stop-color="#10100d"/></linearGradient></defs><path d="M1098 280 L1525 253 L1535 902 L1092 900 Z" fill="url(#shed-cavity)" stroke="#2b241d" stroke-width="11"/><path d="M1150 885 L1160 600 L1245 580 L1252 880 M1350 870 L1350 590 L1430 603 L1436 878" fill="none" stroke="#3a3222" stroke-opacity=".38" stroke-width="10"/></svg></div>
+          <div class="shed-depth" aria-hidden="true"><span class="shed-inner-post"></span><span class="shed-back-planks"></span><span class="shed-floor"></span><span class="shed-bench"></span><span class="shed-crate"></span></div>
+          <img id="shed-door-art" class="door-art shed-door-art" src="./assets/shed-door-cutout.webp" alt="" aria-hidden="true" draggable="false">
+          <!-- The hit regions use the same 1672×941 image-coordinate proportions.
+               No glowing hotspots or visually misaligned rings. -->
+          <button id="mailbox-open" class="scene-hit mailbox-hit" type="button" aria-label="Open the mailbox" title="Open mailbox"></button>
+          <button id="mailbox-envelope" class="scene-envelope" type="button" hidden aria-label="Take the envelope resting on the mailbox floor" title="Take envelope"><span>FIRST CONTACT</span></button>
+          <button id="shed-door" class="scene-hit shed-hit" type="button" hidden aria-label="Open the shed door" title="Open shed door"></button>
+          <button id="shed-look" class="scene-hit shed-hit" type="button" hidden aria-label="Look into the open shed" title="Look into the shed"></button>
+        </div>
+        </div>
+        <div class="scene-bottom">
+          <div class="scene-narration" role="status" aria-live="polite" id="observation">The mailbox flag is raised.</div>
+          <nav class="scene-travel" aria-label="Nearby locations"><button id="scene-exit" type="button" hidden></button></nav>
+        </div>
+      </div>
+      <section class="activity-strip" aria-label="Accessible interaction actions">
+        <span class="activity-label">EXAMINE</span><div id="object-actions" class="object-actions"></div>
+        <span class="save-state" id="save-state">Progress saves locally</span>
+      </section>
+      </div>
+      <aside class="investigation-panel" aria-label="Investigation side panel">
+        <span class="aside-eyebrow">FIELD INVESTIGATION</span>
+        <h2 id="aside-place">First Contact</h2><span class="aside-eyebrow">NEXT LEAD</span>
+        <p id="aside-observation">A raised flag. No return address.</p>
+        <div class="aside-rule"></div>
+        <span class="aside-eyebrow">EVIDENCE</span>
+        <p id="aside-evidence">Nothing collected yet.</p>
+        <div class="aside-rule"></div>
+        <span class="aside-eyebrow">KNOWN LOCATIONS</span>
+        <div id="aside-locations" class="aside-locations"></div>
+      </aside>
+      </div>
+      <nav id="world-rail" class="world-rail" aria-label="Quick travel between known places"></nav>
+      <div id="save-warning" class="save-warning" role="alert" hidden></div>
+      <section id="places-panel" class="places-panel" aria-labelledby="places-heading" hidden>
+        <div class="places-heading"><h2 id="places-heading" tabindex="-1">Known Locations</h2><button type="button" id="places-close" aria-label="Close Known Locations">✕ Close</button></div>
+        <p>Explore new places to add them here. Travel never skips a locked discovery.</p>
+        <div id="places-list" class="places-list"></div>
+      </section>
+    </section>
+    <p class="testing-note">Interface comparison v0.1 · Original user-selected illustrations · Placeholder letter · No real cache coordinates or terminal connection.</p>
+  </main>
+  <dialog id="letter-dialog" aria-labelledby="letter-heading">
+    <article class="letter-card"><div class="letter-mark">FIRST CONTACT</div><h2 id="letter-heading">An unusual delivery</h2>
+      <p class="letter-body">No sender. No postmark.</p><p class="destination">OLD SHED</p>
+      <p>Someone wants this to be found.</p>
+      <small>Experimental letter text. Actual invitation and cipher are designed separately.</small>
+      <div class="letter-actions"><button type="button" id="read-letter">Finish examining</button><button type="button" id="letter-close" class="subtle">Close</button></div>
+    </article>
+  </dialog>
+  <script type="module" src="./world-poc.js"></script>
+</body>
+</html>
